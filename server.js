@@ -2,11 +2,16 @@
 //in the solar system from a text file and print them to the console.
 //Text file: mercury,venus,earth,mars,jupiter,saturn,uranus,neptune,pluto 
 //(I still believe in you pluto)
-const express = require('express');
 
-const planets = require('/planets');
+var fs = require('fs');
+var planets = './planets.txt';
 
-planets.
+
+fs.readFile(planets, 'utf8', (err, data) => {
+    if (err) throw err;
+    var arrayOfPlanets = data.split(',')
+    console.log(arrayOfPlanets);
+});
 
 
   
@@ -19,8 +24,26 @@ planets.
 // GET::myendpointname.com/employees = Json with information from all 10 employees.
 // GET::myendpointname.com/employees/<employeeID> = Json with the information from that specific employee.
 
+//var router = .route
+
+//const express = require('express'); 
+
+// var app = express();
+
+//find()
 
 
+// // Define the port to run on
+// app.set('port', 3000);
+
+//app.use('/', )
+
+
+// app.listen(3000, () => {
+//     console.log(`Started on port 3000`);
+// });
+
+// module.exports = {app};
 
 //HARD: Add the remaining CRUD functionality to your medium problem. 
 // Make sure you return the proper HTTP status codes based on the outcome 

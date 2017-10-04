@@ -10,43 +10,32 @@
 
 const express = require('express');
 const bodyParser = require('body-parser');
-// const router = express.Router();
 const { data } = require('./data/employeeDB.json');
 
 var app = express();
 
 app.use(bodyParser.urlencoded({extended: false})); //The server now understands the information submitted in forms
 
-app.set('view engine', 'pug'); //Pug is shorthand syntax for HTML 
-// const routes = require('./routes'); //because this folder has a index.js file, we don't need to refer to it when we require it
 
-// app.use(routes); 
-// app.use(express.static(__dirname + '/public'));
+console.log(data.employees);
 
+//1. When you hit the endpoint with a GET request we want the api to respond with all data on the employees. 
 app.get('/', (req, res) => {
     res.send(data.employees);
 });
 
-// app.get( ,() => {
+//2. If you hit the endpoint with their employeeID, we want to hand up only the information on that one employee.
+app.get('/:id', (req, res) => {
+    var id = req.params.id;
+    console.log(id);
+    res.send(data.employees[1]);
+});
 
-// });
-
-//Error Handling
-// app.use((req, res, next) => {
-//     console.log("Hello");
-//     const err = new Error('Oh boy, there was an error');
-//     err.status = 500;
-//     next(err);
-// });
 
 
 //3. If you hit the endpoint with an incorrect employeeID, 
 // send back the correct HTTP status code and an error message stating that the employee was not found.
-    // router.use((err, req, res, next) => {
-        // res.locals.error = err;
-        // res.status(err.status);
-        // res.render('error', err );
-    // });
+
 
 // Best place to put 404 error handling is after all the other routes have been declared
     app.use((req, res, next) => {

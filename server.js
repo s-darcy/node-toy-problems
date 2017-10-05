@@ -25,10 +25,15 @@ app.get('/', (req, res) => {
 });
 
 //2. If you hit the endpoint with their employeeID, we want to hand up only the information on that one employee.
-app.get('/:id', (req, res) => {
-    var id = req.params.id;
-    console.log(id);
-    res.send(data.employees[1]);
+app.get('/:shane', (req, res) => {
+    const employeeID = req.params.shane;
+    console.log(req.params);
+    const employeeObj = data.employees.find( (employee) => {
+        return employeeID == employee.employeeID;
+    });
+
+
+    res.send(employeeObj);
 });
 
 
@@ -38,11 +43,11 @@ app.get('/:id', (req, res) => {
 
 
 // Best place to put 404 error handling is after all the other routes have been declared
-    app.use((req, res, next) => {
-        const err = new Error('Not Found');
-        err.status = 404;
-        next(err);
-    });
+    // app.use((req, res, next) => {
+    //     const err = new Error('Not Found');
+    //     err.status = 404;
+    //     next(err);
+    // });
 
 
 app.listen(3000, () => {

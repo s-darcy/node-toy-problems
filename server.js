@@ -31,12 +31,24 @@ app.get('/:shane', (req, res) => {
     const employeeObj = data.employees.find( (employee) => {
         return employeeID == employee.employeeID;
     });
-
-
-    res.send(employeeObj);
+    if (!employeeObj) {
+      res.status(404).send('Opps, we could not find that employee.');  
+    };
+    res.send(employeeObj);    
 });
 
+app.get('/:shane', (req, res) => {
 
+});
+
+    //     if (!employeeID == employee.employeeID) {
+    //         res.status(400).send('Bad Request');
+    //         res.status(404).send('Opps, we could not find that employee.');
+    //         res.status(500).send(`I'm sorry. It seems like our system is down. Try back later.`);
+    //     } else {
+    //         res.send(employeeObj);
+    //     }
+    // }); 
 
 //3. If you hit the endpoint with an incorrect employeeID, 
 // send back the correct HTTP status code and an error message stating that the employee was not found.
